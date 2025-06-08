@@ -179,117 +179,17 @@
   ############################################
   programs = {
     zsh.enable = true;
-    firefox.enable = true;
-
-    nixvim = {
+    neovim = {
       enable = true;
       defaultEditor = true;
-
-      colorschemes.catppuccin.enable = true;
-      plugins = {
-        lualine.enable = true;
-        nix.enable = true;
-        neoscroll.enable = true;
-        mini = {
-          enable = true;
-
-          modules.icons = { };
-          mockDevIcons = true;
-        };
-
-        # Language server
-        lsp = {
-          enable = true;
-          inlayHints = true;
-          servers = {
-            nil_ls.enable = true;
-            rust_analyzer = {
-              enable = true;
-              installRustc = true;
-              installCargo = true;
-            };
-            nixd = {
-              enable = true;
-              settings =
-                let
-                  flake = ''(builtins.getFlake "/etc/nixos)""'';
-                in
-                {
-                  nixpkgs = {
-                    expr = "import ${flake}.inputs.nixpkgs { }";
-                  };
-                  formatting = {
-                    command = [ "nixpkgs-fmt" ];
-                  };
-                  options = {
-                    nixos.expr = "${flake}.nixosConfigurations.redbox.options";
-                  };
-                };
-            };
-          };
-        };
-
-        neo-tree = {
-          enable = true;
-          enableDiagnostics = true;
-          enableGitStatus = true;
-          enableModifiedMarkers = true;
-          enableRefreshOnWrite = true;
-          closeIfLastWindow = true;
-          popupBorderStyle = "rounded"; # Type: null or one of “NC”, “double”, “none”, “rounded”, “shadow”, “single”, “solid” or raw lua code
-          buffers = {
-            bindToCwd = false;
-            followCurrentFile = {
-              enabled = true;
-            };
-          };
-        };
-
-        luasnip = {
-          enable = true;
-          fromVscode = [ { } ];
-        };
-        friendly-snippets.enable = true;
-
-        cmp = {
-          enable = true;
-          autoEnableSources = true;
-
-          settings = {
-            sources = [
-              { name = "nvim_lsp"; }
-              { name = "path"; }
-              { name = "buffer"; }
-              { name = "luasnip"; }
-            ];
-
-            mapping = {
-              "<C-d>" = # Lua
-                "cmp.mapping.scroll_docs(-4)";
-              "<C-f>" = # Lua
-                "cmp.mapping.scroll_docs(4)";
-              "<C-Space>" = # Lua
-                "cmp.mapping.complete()";
-              "<C-e>" = # Lua
-                "cmp.mapping.close()";
-              "<Tab>" = # Lua
-                "cmp.mapping(cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select}), {'i', 's'})";
-              "<S-Tab>" = # Lua
-                "cmp.mapping(cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select}), {'i', 's'})";
-              "<CR>" = # Lua
-                "cmp.mapping.confirm({ select = false, behavior = cmp.ConfirmBehavior.Replace })";
-            };
-          };
-        };
-      };
     };
 
-    # TODO: See if this is still useful
-    gamemode.enable = true;
+    firefox.enable = true;
+
     steam = {
       enable = true;
-      remotePlay.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
+      # remotePlay.openFirewall = true;
+      # localNetworkGameTransfers.openFirewall = true;
       gamescopeSession.enable = true;
     };
   };
@@ -304,14 +204,13 @@
     mangohud
     protonup-qt
     htop
-    vscode
-    nixd
     nixfmt-rfc-style
     cifs-utils
     caligula
     git
     godot
     caligula
+    vulnix
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

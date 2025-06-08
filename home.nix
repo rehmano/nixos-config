@@ -44,14 +44,17 @@
     enable = true;
     settings = {
       theme = "dracula";
-      editor.cursor-shape = {
-        normal = "block";
-        insert = "bar";
-        select = "underline";
-      };
-      editor.inline-diagnostics = {
-        cursor-line = "hint";
-        other-lines = "error";
+      editor = {
+        cursor-shape = {
+          normal = "block";
+          insert = "bar";
+          select = "underline";
+        };
+
+        inline-diagnostics = {
+          cursor-line = "warning";
+          other-lines = "hint";
+        };
       };
     };
     languages.language = [
@@ -75,6 +78,9 @@
     qbittorrent
     dolphin-emu
     prismlauncher
+    vscode
+    nixd
+    nil
   ];
 
   # This value determines the Home Manager release that your

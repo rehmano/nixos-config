@@ -9,11 +9,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -21,13 +16,13 @@
       nixpkgs,
       chaotic,
       home-manager,
-      nixvim,
       ...
     }:
     let
       system = "x86_64-linux";
     in
     {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt-tree;
       nixosConfigurations."redbox" = nixpkgs.lib.nixosSystem {
         system = system;
 
@@ -41,7 +36,6 @@
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
-          nixvim.nixosModules.nixvim
           ./configuration.nix
           chaotic.nixosModules.default
         ];
