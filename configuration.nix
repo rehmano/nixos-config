@@ -13,16 +13,18 @@
       "nix-command"
       "flakes"
     ];
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
   };
 
   nixpkgs = {
     config.allowUnfree = true;
     config.permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Bolt (rs3)
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep 6 --keep-since 7d";
+    flake = "/home/rehmans/nixos-config";
   };
 
   ############################################
@@ -31,9 +33,18 @@
   boot = {
     kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+
+        # Use max resolution provided for boot + plymouth
+        consoleMode = "max";
+      };
       efi.canTouchEfiVariables = true;
     };
+
+    # Plymouth
+    plymouth.enable = true;
+    initrd.systemd.enable = true;
   };
 
   ############################################
