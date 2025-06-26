@@ -31,7 +31,7 @@
   # Boot                                     #
   ############################################
   boot = {
-    kernelPackages = pkgs.linuxPackages_cachyos;
+    kernelPackages = pkgs.linuxPackages_latest;
     loader = {
       systemd-boot = {
         enable = true;
@@ -41,10 +41,6 @@
       };
       efi.canTouchEfiVariables = true;
     };
-
-    # Plymouth
-    plymouth.enable = true;
-    initrd.systemd.enable = true;
   };
 
   ############################################
@@ -103,12 +99,22 @@
     resolved.enable = true;
     mullvad-vpn.enable = true;
     mullvad-vpn.package = pkgs.mullvad-vpn; # Specified for desktop pkg
+
+    #flatpak
+    flatpak.enable = true;
+  };
+
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
   };
 
   ############################################
   # Hardware                                 #
   ############################################
-  chaotic.mesa-git.enable = true;
   hardware = {
     bluetooth.enable = true;
     graphics = {
@@ -222,6 +228,7 @@
     godot
     caligula
     vulnix
+    heroic
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
