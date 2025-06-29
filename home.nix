@@ -81,6 +81,7 @@
     vscode
     nixd
     nil
+    heroic
   ];
 
   # This value determines the Home Manager release that your

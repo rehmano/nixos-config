@@ -61,12 +61,12 @@
     # Enable the X11 windowing system.
     # You can disable this if you're only using the Wayland session.
     xserver = {
-      enable = true;
+      enable = false;
       # Configure keymap in X11
-      xkb = {
-        layout = "us";
-        variant = "";
-      };
+      # xkb = {
+      #   layout = "us";
+      #   variant = "";
+      # };
     };
 
     displayManager.sddm = {
@@ -195,6 +195,7 @@
   # Programs                                 #
   ############################################
   programs = {
+    xwayland.enable = true;
     zsh.enable = true;
     neovim = {
       enable = true;
@@ -228,7 +229,7 @@
     godot
     caligula
     vulnix
-    heroic
+    easyeffects
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
