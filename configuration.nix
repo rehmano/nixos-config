@@ -31,7 +31,7 @@
   # Boot                                     #
   ############################################
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
       systemd-boot = {
         enable = true;
@@ -55,6 +55,8 @@
   # Services                                 #
   ############################################
   services = {
+    fstrim.enable = true;
+
     # Needed for GC controller
     udev.packages = [ pkgs.dolphin-emu ];
 

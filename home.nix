@@ -82,6 +82,7 @@
     nixd
     nil
     heroic
+    vesktop
   ];
 
   # This value determines the Home Manager release that your
