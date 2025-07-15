@@ -189,6 +189,7 @@
         kdePackages.yakuake
         kdePackages.ffmpegthumbs
         kdePackages.colord-kde
+        kdePackages.akregator
       ];
     };
   };
