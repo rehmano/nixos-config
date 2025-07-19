@@ -18,15 +18,6 @@
   nixpkgs = {
     config.allowUnfree = true;
     config.permittedInsecurePackages = [ "openssl-1.1.1w" ]; # Bolt (rs3)
-    overlays = [
-      (final: prev: {
-        # https://github.com/nixos/nixpkgs/issues/425323
-        jdk8 = prev.jdk8.overrideAttrs {
-          separateDebugInfo = false;
-          __structuredAttrs = false;
-        };
-      })
-    ];
   };
 
   programs.nh = {
