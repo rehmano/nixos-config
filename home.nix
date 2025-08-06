@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 
 {
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "rehmans";
@@ -83,6 +84,7 @@
     nil
     heroic
     vesktop
+    joplin-desktop
   ];
 
   # This value determines the Home Manager release that your
