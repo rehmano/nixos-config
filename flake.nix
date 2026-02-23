@@ -10,14 +10,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
     {
-      self,
-      nixpkgs,
+      catppuccin,
       home-manager,
+      nixpkgs,
       plasma-manager,
+      self,
       ...
     }@inputs:
     let
@@ -44,6 +46,7 @@
               system.stateVersion = stateVersion;
               networking.hostName = hostname;
             }
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {
@@ -51,7 +54,10 @@
               };
               home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
               home-manager.users.${user} = {
-                imports = [ ./users/${user}/home.nix ];
+                imports = [
+                  ./users/${user}/home.nix
+                  catppuccin.homeModules.catppuccin
+                ];
                 home.stateVersion = stateVersion;
               };
             }

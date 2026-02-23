@@ -12,6 +12,10 @@ in
   home.username = "rehmans";
   home.homeDirectory = "/home/rehmans";
 
+  catppuccin.enable = true;
+  catppuccin.flavor = "macchiato";
+  catppuccin.accent = "peach";
+
   programs.zsh = {
     enable = true;
     prezto = {
@@ -32,6 +36,7 @@ in
       ];
     };
     history.size = 20000;
+    autosuggestion.enable = true;
   };
 
   programs.direnv = {
@@ -109,7 +114,72 @@ in
   programs.mpv.enable = true;
   programs.discord.enable = true;
   programs.joplin-desktop.enable = true;
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    policies = {
+      CaptivePortal = false;
+      DisablePocket = true;
+      DisableTelemetry = true;
+      DisableFirefoxAccounts = true;
+      DisableFirefoxStudies = true;
+      FirefoxHome = {
+        Search = false;
+        TopSites = false;
+        Highlights = false;
+        Pocket = false;
+        Snippets = false;
+      };
+      UserMessaging = {
+        ExtensionRecommendations = false;
+        FeatureRecommendations = false;
+        SkipOnboarding = true;
+      };
+      GenerativeAI = {
+        Enabled = false;
+        Chatbot = false;
+        LinkPreviews = false;
+        TabGroups = false;
+      };
+      ExtensionSettings = {
+        "*@mozilla.org" = {
+          installation_mode = "blocked";
+        };
+        "uBlock0@raymondhill.net" = {
+          default_area = "navbar";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "normal_installed";
+          private_browsing = true;
+        };
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          default_area = "navbar";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        "addon@darkreader.org" = {
+          default_area = "navbar";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        "{aecec67f-0d10-4fa7-b7c7-609a2db280cf}" = {
+          default_area = "menupanel";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/violentmonkey/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        "FirefoxColor@mozilla.com" = {
+          default_area = "menupanel";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/firefox-color/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+      };
+    };
+    profiles.default = {
+      settings = {
+        "general.smoothScroll.msdPhysics.enabled" = true;
+        "browser.startup.page" = 3;
+      };
+      extensions.force = true;
+    };
+  };
 
   home.packages = with pkgs; [
     spotify

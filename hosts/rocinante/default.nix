@@ -43,11 +43,13 @@
     };
   };
 
-  programs.firefox.enable = true;
-
   environment.systemPackages = with pkgs; [
     nvtopPackages.amd
   ];
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "macchiato";
+  catppuccin.accent = "peach";
 
   # List services that you want to enable:
 
