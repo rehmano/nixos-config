@@ -28,6 +28,9 @@
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "schedutil";
 
+  virtualisation.docker.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
+
   programs.nh = {
     enable = true;
     clean.enable = true;

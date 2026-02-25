@@ -5,11 +5,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
     catppuccin.url = "github:catppuccin/nix";
   };
 
@@ -18,7 +13,6 @@
       catppuccin,
       home-manager,
       nixpkgs,
-      plasma-manager,
       self,
       ...
     }@inputs:
@@ -52,7 +46,6 @@
               home-manager.extraSpecialArgs = {
                 inherit self inputs hostname;
               };
-              home-manager.sharedModules = [ plasma-manager.homeModules.plasma-manager ];
               home-manager.users.${user} = {
                 imports = [
                   ./users/${user}/home.nix

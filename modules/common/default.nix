@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -6,7 +6,6 @@
   nix.settings = {
     trusted-users = [
       "root"
-      "rehmans"
     ];
     experimental-features = [
       "nix-command"
@@ -15,6 +14,7 @@
   };
 
   programs.zsh.enable = true;
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -26,12 +26,8 @@
   };
 
   environment.systemPackages = [
-    pkgs.nixfmt
-    pkgs.nixfmt-tree
     pkgs.cifs-utils
     pkgs.caligula
-    pkgs.wget
-    pkgs.htop
   ];
 
   networking.networkmanager.enable = true;

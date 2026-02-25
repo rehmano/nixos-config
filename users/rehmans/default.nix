@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home-manager.useGlobalPkgs = true;
@@ -13,11 +18,17 @@
       extraGroups = [
         "networkmanager"
         "wheel"
-      ];
+      ]
+      ++ lib.optional config.virtualisation.docker.enable "docker";
       packages = with pkgs; [
-        kdePackages.kate
         kdePackages.ffmpegthumbs
       ];
     };
+  };
+
+  nix.settings = {
+    trusted-users = [
+      "rehmans"
+    ];
   };
 }
