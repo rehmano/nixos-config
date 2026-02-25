@@ -16,12 +16,25 @@
     ../../users/rehmans
   ];
 
-  networking.wireless.enable = true;
   hardware = {
     bluetooth.enable = true;
     graphics = {
       enable = true;
       enable32Bit = true;
     };
+  };
+
+  virtualisation.docker.enable = true;
+  virtualisation.docker.autoPrune.enable = true;
+
+  catppuccin.enable = true;
+  catppuccin.flavor = "macchiato";
+  catppuccin.accent = "peach";
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 5";
+    flake = "/home/rehmans/nixos";
   };
 }

@@ -6,12 +6,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
     {
       catppuccin,
       home-manager,
+      nixos-hardware,
       nixpkgs,
       self,
       ...
@@ -70,6 +72,7 @@
         arboghast = mkSystem {
           hostname = "arboghast";
           stateVersion = "25.11";
+          extraModules = [ nixos-hardware.nixosModules.framework-amd-ai-300-series ];
         };
       };
     };
