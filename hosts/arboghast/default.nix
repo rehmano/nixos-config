@@ -31,6 +31,8 @@
   catppuccin.flavor = "macchiato";
   catppuccin.accent = "peach";
 
+  catppuccin.sddm.enable = false;
+
   programs.nh = {
     enable = true;
     clean.enable = true;
