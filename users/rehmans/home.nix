@@ -22,10 +22,6 @@ in
   home.username = "rehmans";
   home.homeDirectory = "/home/rehmans";
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
-  catppuccin.accent = "peach";
-
   programs.zsh = {
     enable = true;
     prezto = {
@@ -65,6 +61,35 @@ in
     ];
   };
 
+  programs.git = {
+    enable = true;
+  };
+
+  programs.kodi = {
+    enable = true;
+    sources = {
+      files = {
+        source = [
+          {
+            name = "fen";
+            path = "https://fenlightanonymouse.github.io/packages/";
+            allowsharing = "true";
+          }
+          {
+            name = "coco";
+            path = "https://cocojoe2411.github.io/";
+            allowsharing = "true";
+          }
+          {
+            name = "fentastic";
+            path = "https://ivarbrandt.github.io/repository.ivarbrandt/";
+            allowsharing = "true";
+          }
+        ];
+      };
+    };
+  };
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
@@ -77,6 +102,8 @@ in
           mkhl.direnv
           jnoortheen.nix-ide
           usernamehw.errorlens
+          catppuccin.catppuccin-vsc
+          catppuccin.catppuccin-vsc-icons
         ];
 
         userSettings = {
@@ -102,13 +129,16 @@ in
                   "nixfmt"
                 ];
               };
+              "nixpkgs" = {
+                "expr" = "import (builtins.getFlake \"/home/rehmans/nixos\").inputs.nixpkgs { }";
+              };
               "options" = {
                 "nixos" = {
-                  "expr" = "(builtins.getFlake \"${self}\").nixosConfigurations.${hostname}.options";
+                  "expr" = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options";
                 };
                 "home-manager" = {
                   "expr" =
-                    "(builtins.getFlake \"${self}\").nixosConfigurations.${hostname}.options.home-manager.users.type.getSubOptions []";
+                    "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.${hostname}.options.home-manager.users.type.getSubOptions []";
                 };
               };
             };
@@ -116,6 +146,7 @@ in
           "telemetry.editStats.enabled" = false;
           "telemetry.feedback.enabled" = false;
           "telemetry.telemetryLevel" = "off";
+          "workbench.colorTheme" = "Catppuccin Macchiato";
           "workbench.commandPalette.showAskInChat" = false;
           "workbench.editor.enablePreview" = false;
           "workbench.settings.showAISearchToggle" = false;
@@ -193,21 +224,24 @@ in
           install_url = "https://addons.mozilla.org/firefox/downloads/latest/violentmonkey/latest.xpi";
           installation_mode = "normal_installed";
         };
-        "FirefoxColor@mozilla.com" = {
-          default_area = "menupanel";
-          install_url = "https://addons.mozilla.org/firefox/downloads/latest/firefox-color/latest.xpi";
-          installation_mode = "normal_installed";
-        };
+        # "FirefoxColor@mozilla.com" = {
+        #   default_area = "menupanel";
+        #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/firefox-color/latest.xpi";
+        #   installation_mode = "normal_installed";
+        # };
       };
     };
     profiles.default = {
       settings = {
         "browser.aboutConfig.showWarning" = false;
-        "browser.ml.linkPreview.enabled" = true;
+        "browser.ml.linkPreview.enabled" = false;
         "general.smoothScroll.msdPhysics.enabled" = true;
         "browser.startup.page" = 3;
         "signons.management.page.breah-alerts.enabled" = false;
         "signons.rememberSignons" = false;
+        "browser.ai.control.default" = "blocked";
+        "extensions.ml.enabled" = false;
+        "extensions.activeThemeID" = "firefox-compact-dark@mozilla.org";
       };
       extensions.force = true;
       isDefault = true;
@@ -223,11 +257,11 @@ in
     })
     nixd
     nil
-    heroic
     easyeffects
     devenv
-    kodi-wayland
     signal-desktop
     fluxerBin
+    tldr
+    protonplus
   ];
 }

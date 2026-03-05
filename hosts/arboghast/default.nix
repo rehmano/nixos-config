@@ -27,12 +27,6 @@
   virtualisation.docker.enable = true;
   virtualisation.docker.autoPrune.enable = true;
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
-  catppuccin.accent = "peach";
-
-  catppuccin.sddm.enable = false;
-
   programs.nh = {
     enable = true;
     clean.enable = true;

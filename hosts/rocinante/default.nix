@@ -50,9 +50,12 @@
     nvtopPackages.amd
   ];
 
-  catppuccin.enable = true;
-  catppuccin.flavor = "macchiato";
-  catppuccin.accent = "peach";
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 48 * 1024;
+    }
+  ];
 
   # List services that you want to enable:
 

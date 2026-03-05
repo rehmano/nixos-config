@@ -23,9 +23,18 @@ in
     services.scx.enable = true;
     services.scx.scheduler = "scx_lavd";
 
+    programs.gamescope.enable = true;
+
     environment.systemPackages = [
       pkgs.protonup-qt
       pkgs.mangohud
+      (pkgs.heroic.override {
+        extraPkgs =
+          pkgs': with pkgs'; [
+            gamescope
+          ];
+      })
+      pkgs.r2modman
     ];
 
     programs.steam = {
@@ -33,6 +42,7 @@ in
       remotePlay.openFirewall = cfg.openSteamPorts;
       localNetworkGameTransfers.openFirewall = cfg.openSteamPorts;
       gamescopeSession.enable = true;
+      protontricks.enable = true;
     };
   };
 }

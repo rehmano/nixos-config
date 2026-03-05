@@ -5,13 +5,11 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
     {
-      catppuccin,
       home-manager,
       nixos-hardware,
       nixpkgs,
@@ -42,7 +40,6 @@
               system.stateVersion = stateVersion;
               networking.hostName = hostname;
             }
-            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {
@@ -51,7 +48,6 @@
               home-manager.users.${user} = {
                 imports = [
                   ./users/${user}/home.nix
-                  catppuccin.homeModules.catppuccin
                 ];
                 home.stateVersion = stateVersion;
               };
