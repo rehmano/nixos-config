@@ -28,6 +28,7 @@
   environment.systemPackages = [
     pkgs.cifs-utils
     pkgs.caligula
+    pkgs.unrar
   ];
 
   services.flatpak.enable = true;
