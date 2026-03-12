@@ -43,6 +43,9 @@ in
     };
     history.size = 20000;
     autosuggestion.enable = true;
+    sessionVariables = {
+      LESS = "-g -i -M -R -S -w";
+    };
   };
 
   programs.direnv = {
