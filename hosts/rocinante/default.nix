@@ -10,6 +10,7 @@
     ../../modules/boot
     ../../modules/common
     ../../modules/development
+    ../../modules/docker
     ../../modules/gaming
     ../../modules/plasma
     ../../modules/vpn
@@ -26,10 +27,7 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.kernelParams = [ "amd_pstate=active" ];
   powerManagement.enable = true;
-  powerManagement.cpuFreqGovernor = "schedutil";
-
-  virtualisation.docker.enable = true;
-  virtualisation.docker.autoPrune.enable = true;
+  powerManagement.cpuFreqGovernor = "performance";
 
   programs.nh = {
     enable = true;
