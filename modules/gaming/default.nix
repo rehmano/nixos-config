@@ -21,7 +21,7 @@ in
 
   config = lib.mkIf cfg.enable {
     services.scx.enable = true;
-    services.scx.scheduler = "scx_lavd";
+    services.scx.scheduler = "scx_bpfland";
 
     programs.gamescope.enable = true;
 
