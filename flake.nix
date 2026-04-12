@@ -40,6 +40,23 @@
               system.stateVersion = stateVersion;
               networking.hostName = hostname;
             }
+            # Pin easyeffects to 8.1.4, 8.15 breaks Kodi sound
+            # https://github.com/wwmm/easyeffects/issues/4914#issuecomment-4076352342
+            {
+              nixpkgs.overlays = [
+                (final: prev: {
+                  easyeffects = prev.easyeffects.overrideAttrs (old: {
+                    version = "8.1.4";
+                    src = prev.fetchFromGitHub {
+                      owner = "wwmm";
+                      repo = "easyeffects";
+                      rev = "v8.1.4";
+                      hash = "sha256-0/xbvmj7p8JE3aH84SrcEf8kr+0X1KgHMRkBca+2rtY=";
+                    };
+                  });
+                })
+              ];
+            }
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = {

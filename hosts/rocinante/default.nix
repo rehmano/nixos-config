@@ -24,7 +24,7 @@
   # NixOS options
   hardware.amdgpu.initrd.enable = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelParams = [ "amd_pstate=active" ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
