@@ -1,5 +1,4 @@
 {
-  self,
   config,
   hostname,
   pkgs,
@@ -7,7 +6,7 @@
 }:
 
 let
-  fluxerBin = pkgs.callPackage ../../pkgs/fluxer-bin.nix { };
+  fluxerDesktop = pkgs.callPackage ../../pkgs/fluxer-desktop.nix { };
 
   configDirName =
     {
@@ -263,7 +262,7 @@ in
     easyeffects
     devenv
     signal-desktop
-    fluxerBin
+    fluxerDesktop
     tldr
     protonplus
   ];

@@ -3,14 +3,24 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  nix.settings = {
-    trusted-users = [
-      "root"
-    ];
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix = {
+    channel.enable = false;
+    settings = {
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+    };
+  };
+
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 5";
   };
 
   programs.zsh.enable = true;
@@ -21,7 +31,6 @@
   };
 
   environment.sessionVariables = {
-    EDITOR = "nvim";
     VISUAL = "nvim";
   };
 
@@ -29,6 +38,8 @@
     pkgs.cifs-utils
     pkgs.caligula
     pkgs.unrar
+    pkgs.lm_sensors
+    pkgs.bind.dnsutils
   ];
 
   services.flatpak.enable = true;
@@ -45,8 +56,6 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -63,10 +72,20 @@
     variant = "";
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.droid-sans-mono
-  ];
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-color-emoji
+      liberation_ttf
+      dejavu_fonts
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      font-awesome
+    ];
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -85,4 +104,7 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  networking.firewall.enable = true;
+  programs.dconf.enable = true;
 }

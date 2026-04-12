@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
@@ -21,27 +21,16 @@
   gaming.enable = true;
   gaming.openSteamPorts = true;
 
-  # NixOS options
-  hardware.amdgpu.initrd.enable = true;
-
   boot.kernelPackages = pkgs.linuxPackages;
-  boot.kernelParams = [ "amd_pstate=active" ];
   powerManagement.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
 
   programs.nh = {
-    enable = true;
-    clean.enable = true;
-    clean.extraArgs = "--keep-since 4d --keep 5";
     flake = "/home/rehmans/nixos";
   };
 
   hardware = {
     bluetooth.enable = true;
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -54,15 +43,4 @@
       size = 48 * 1024;
     }
   ];
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 }
